@@ -23,8 +23,8 @@ const RecommandedReads = () => {
   return (
     <div className='flex flex-col gap-2 mt-2'>
       <h2 className='text-[17px] font-medium text-[#343334B5]'>RECOMMENDED READS</h2>
-      {articles.map(item => (
-        <div className='w-[411px] h-[51px] border-[1px] p-1 border-[#DBC9E5] rounded-xl bg-white'>
+      {articles.map((item, index) => (
+        <div key={index} className='w-[411px] h-[51px] border-[1px] p-1 border-[#DBC9E5] rounded-xl bg-white'>
         <div className='flex items-center justify-between'>
           <p className='text-base font-normal line-clamp-1 mr-2'>{item.name}</p>
           <div className='text-[12px]'>
