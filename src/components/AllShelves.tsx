@@ -1,4 +1,6 @@
+import { useState } from "react"
 import { LuPlus } from "react-icons/lu"
+import AddNewShelf from "./AddNewShelf"
 
 const allShelves = [
   {
@@ -24,32 +26,40 @@ const allShelves = [
 ]
 
 const AllShelves = () => {
+  const [isNewShelfClicked, setIsNewShelfClicked] = useState(false)
   return (
-    <div className="flex flex-col mt-2 gap-1">
+    <div>
+      {isNewShelfClicked ? 
+      <AddNewShelf/> : 
+      <div className="flex flex-col mt-2 gap-1">
       <p className="text-[10px]">All Shelves</p>
       <div className="flex justify-between">
         <div className="flex flex-col gap-1">
             {allShelves.map(item => (
               <div className="h-[21px] flex gap-1">
-               <img 
-               src={item.imageUrl} 
-               alt={item.name}
-               className="w-[25px] rounded-sm p-[1px]"
-               />
-               <div className="text-[6px]">
+              <img 
+              src={item.imageUrl} 
+              alt={item.name}
+              className="w-[25px] rounded-sm p-[1px]"
+              />
+              <div className="text-[6px]">
                 <p>{item.name}</p>
                 <p>{item.numberOfArticles}</p>
               </div>
-             </div>
-           ))}
+            </div>
+          ))}
         </div>
         <button
         className="w-[59px] h-[17px] rounded-md flex items-center justify-center place-self-end text-white bg-[#940FAF] text-[8px] font-medium"
+        onClick={() => setIsNewShelfClicked(true)}
         >
           <LuPlus fontSize={11}/>
           New Shelf
         </button>
       </div>
+    </div>
+       }
+      
     </div>
   )
 }

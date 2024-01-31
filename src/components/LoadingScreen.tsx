@@ -18,7 +18,10 @@ const LoadingScreen = ({isLoading}: {isLoading:boolean}) => {
       <div className="text-[12px] font-Raleway font-semibold text-[#504874] mb-[14px] mx-3 flex justify-between items-center">
       <p>on gwern.net</p>
       {!isLoading && 
-      <button className="flex gap-1 items-center"><LuPencilLine fontSize={20}/>Add Note</button>}
+      <button className="flex gap-1 items-center">
+        <LuPencilLine fontSize={20}/>
+      Add Note
+      </button>}
       </div>
     </div>
   )
