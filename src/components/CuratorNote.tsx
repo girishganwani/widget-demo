@@ -20,4 +20,4 @@ const CuratorNote = () => {
   )
 }
 
-export default CuratorNote  
+export default CuratorNote
