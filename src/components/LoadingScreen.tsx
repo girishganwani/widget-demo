@@ -2,17 +2,10 @@ import LoadingSpinner from "./LoadingSpinner"
 import PinButton from "./PinButton"
 import { RiDeleteBinLine } from "react-icons/ri";
 import { LuPencilLine } from "react-icons/lu";
-import { useState } from "react";
-import CuratorNote from "./CuratorNote";
 
 const LoadingScreen = ({isLoading}: {isLoading:boolean}) => {
-  const [isCuratorNote, setIsCuratorNote] = useState(false)
-  const addCuratorNote = () => {
-    setIsCuratorNote(!isCuratorNote)
-  }
   return (
-    <div className="bg-[#edddf3] rounded-xl border-[1px] border-[#504874]">
-    <div className="w-[411px] h-[155px] flex flex-col justify-between">
+    <div className="w-[411px] h-[155px] bg-[#edddf3] rounded-xl flex flex-col justify-between border-[1px] border-[#504874]">
       <div className="flex justify-between items-center mr-3">
         <PinButton/>
         {!isLoading && 
@@ -25,14 +18,12 @@ const LoadingScreen = ({isLoading}: {isLoading:boolean}) => {
       <div className="text-[12px] font-Raleway font-semibold text-[#504874] mb-[14px] mx-3 flex justify-between items-center">
       <p>on gwern.net</p>
       {!isLoading && 
-      <button className="flex gap-1 items-center" onClick={addCuratorNote}>
+      <button className="flex gap-1 items-center">
         <LuPencilLine fontSize={20}/>
       Add Note
       </button>}
       </div>
     </div>
-      {!isLoading && isCuratorNote && <CuratorNote/>}
-    </div>  
   )
 }
 

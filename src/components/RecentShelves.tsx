@@ -40,4 +40,4 @@ const RecentShelves = () => {
   )
 }
 
-export default RecentShelves
+export default RecentShelves;
