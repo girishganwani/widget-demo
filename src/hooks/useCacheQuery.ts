@@ -1,59 +1,69 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 import axiosInstance from '../axios';
-import { AxiosResponse, LocalStorageData, useCacheQueryProps } from "../types/interfaces";
+import { LocalStorageData, useCacheQueryProps } from "../types/interfaces";
 
-const useCacheQuery = <T>({ requestConfig }: useCacheQueryProps): AxiosResponse<T> => {
+const useCacheQuery = <T>(initialConfig: useCacheQueryProps<T>) => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const axiosRequest = useCallback(async () => {
+  const axiosRequest = useCallback(async (dynamicConfig: Partial<useCacheQueryProps<T>> = {}) => {
+    const config = { ...initialConfig, ...dynamicConfig };
     setLoading(true);
     setData(null);
     setError(null);
+
     try {
-      const { cacheKey, expiryTime } = requestConfig;
-      console.log("FirstConsole...")
-      const cachedData: LocalStorageData<T> = JSON.parse(localStorage.getItem(cacheKey) || '');
-      console.log ("Second Console...")
-      if (cachedData) {
-        const { data, expiredTime } = cachedData;
-        if (data) {
-          setData(data);
+      const requestOptions = {
+        ...config.requestConfig,
+        data: config.body,
+      };
+
+      if (config.requestConfig.method === 'GET' && config.requestConfig.cacheKey) {
+        const cacheKey = config.requestConfig.cacheKey;
+        const cachedItem = localStorage.getItem(cacheKey);
+        const cachedData: LocalStorageData<T> | null = cachedItem ? JSON.parse(cachedItem) : null;
+
+        if (cachedData && cachedData.data && (!cachedData.expiredTime || cachedData.expiredTime > Date.now())) {
+          setData(cachedData.data);
           setLoading(false);
-          if (!expiredTime || expiredTime > Date.now()) {
-            return;
+          return;
+        }
+      }
+
+      const response = await axiosInstance(requestOptions);
+
+      if (config.requestConfig.cacheKey) {
+        const cacheKey = config.requestConfig.cacheKey;
+        const cachedItem = localStorage.getItem(cacheKey);
+        const cachedData: LocalStorageData<T[] | T> | null = cachedItem ? JSON.parse(cachedItem) : null;
+
+        if (config.requestConfig.method === 'POST') {
+          let updatedData;
+          if (cachedData && Array.isArray(cachedData.data)) {
+            updatedData = [...cachedData.data, response.data];
+          } else {
+            updatedData = [response.data];
           }
+          localStorage.setItem(cacheKey, JSON.stringify({ data: updatedData }));
+        } else if (config.requestConfig.method === 'GET') {
+          const storageData: LocalStorageData<T> = {
+            data: response.data,
+            ...(config.requestConfig.expiryTime && { expiredTime: Date.now() + config.requestConfig.expiryTime * 1000 }),
+          };
+          localStorage.setItem(cacheKey, JSON.stringify(storageData));
         }
-      }
 
-      const { data } = await axiosInstance(requestConfig);
-      console.log("here")
-      let storageData: LocalStorageData<T> = { data };
-      if (expiryTime) {
-        storageData = {
-          data,
-          expiredTime: Date.now() + expiryTime * 1000
-        }
+        setData(response.data);
       }
-      localStorage.setItem(cacheKey, JSON.stringify(storageData));
-
-      setData(data);
-      setLoading(false);
-    }
-    catch (e) {
+    } catch (e) {
       setError(e as Error);
+    } finally {
       setLoading(false);
-      console.log("Inside catch error", e)
     }
-  }, []);
+  }, [initialConfig]);
 
-  return {
-    axiosRequest,
-    data,
-    loading,
-    error,
-  }
-}
+  return { data, loading, error, axiosRequest };
+};
 
 export default useCacheQuery;

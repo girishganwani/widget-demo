@@ -19,23 +19,23 @@ const recent = [
 
 const RecentShelves = () => {
   return (
-    <div className="flex flex-col gap-1 mt-1">
-      <p className="text-[10px]">Recent</p>
-      <div className="flex justify-between">
+    <div className="flex flex-col gap-1 mt-1 divide-[#DBC9E5] divide-[1px]">
+      <p className="text-[15px]">Recent</p>
+      <div className="flex justify-between mx-3">
         {recent.map(item => (
-          <div className="w-[35px]">
+          <div className="w-[66px] mr-3">
             <img
             src={item.imageUrl} 
             alt={item.topic}
-            className="h-[35px] rounded-sm"
+            className="h-[46px] w-[46px] rounded-sm"
             />
-            <p className="text-[7px] my-1">
+            <p className="text-[13px] my-1">
               {item.topic}
             </p>
           </div>
         ))}
       </div>
-      <hr className="w-[193px] ml-[-12px] bg-[#DBC9E5]"/>
+      <hr className="w-[409px] ml-[-12px] bg-[#DBC9E5]"/>
     </div>
   )
 }

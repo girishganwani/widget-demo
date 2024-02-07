@@ -4,3 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.scrollbar-hide:hover {
+  scrollbar-width: thin;
+  scrollbar-color: transparent #ddd;
+}

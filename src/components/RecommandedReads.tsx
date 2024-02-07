@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { VscLinkExternal } from 'react-icons/vsc'
-import { IURLResponse } from '../types/interfaces'
-import useCacheQuery from '../hooks/useCacheQuery'
+// import { IURLResponse } from '../types/interfaces'
+// import useCacheQuery from '../hooks/useCacheQuery'
 
 const articles = [
   {
@@ -106,20 +106,20 @@ const articles = [
   },
 ]
 
-const requestConfig = {
-  method: 'GET',
-  url: '/articles/recommended',
-  cacheKey: 'recommendedUrls',
-  expiryTime: 600,
-}
+// const requestConfig = {
+//   method: 'GET',
+//   url: '/articles/recommended',
+//   cacheKey: 'recommendedUrls',
+//   expiryTime: 600,
+// }
 
 const RecommandedReads = () => {
   const [visibleArticle, setVisibleArticle] = useState(4)
-  const { data, axiosRequest, error, loading } = useCacheQuery<IURLResponse[]>({ requestConfig });
+  // const { data, axiosRequest, error, loading } = useCacheQuery<IURLResponse[]>({ requestConfig });
 
-  useEffect(() => {
-    axiosRequest();
-  },[])
+  // useEffect(() => {
+  //   axiosRequest();
+  // },[]);
 
   const loadMore = () => {
     setVisibleArticle(prev => prev + 4);
@@ -127,12 +127,12 @@ const RecommandedReads = () => {
   return (
     <div className='flex flex-col gap-2 mt-2'>
       <h2 className='text-[17px] font-medium text-[#343334B5]'>RECOMMENDED READS</h2>
-      <div className='max-h-80 overflow-y-auto overflow-x-hidden space-y-2'>
+      <div className='max-h-80 overflow-y-auto overflow-x-hidden space-y-2 scrollbar-hide'>
         {articles.slice(0, visibleArticle).map((item, index) => (
           <div className='w-[411px] h-[51px] border-[1px] p-1 border-[#DBC9E5] rounded-xl bg-white' key={index}>
           <div className='flex items-center justify-between'>
             <p className='text-base font-normal line-clamp-1 mr-2'>{item.title}</p>
-            <div className='text-[12px]'>
+            <div className='text-[12px] mr-4'>
                 <a href={item.websiteBaseURL}><VscLinkExternal/></a>
             </div>
           </div>
@@ -150,4 +150,4 @@ const RecommandedReads = () => {
   )
 }
 
-export default RecommandedReads
+export default RecommandedReads;

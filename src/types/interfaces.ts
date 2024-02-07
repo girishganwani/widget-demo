@@ -1,7 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 
-export type useCacheQueryProps = {
-  requestConfig: AxiosRequestConfig & { cacheKey: string, expiryTime?: number };
+export type useCacheQueryProps<T> = {
+  requestConfig: AxiosRequestConfig & { cacheKey?: string, expiryTime?: number };
+  body?: T;
 }
 
 export interface AxiosResponse<T> {
@@ -21,4 +22,8 @@ export interface IURLResponse {
   website: string,
   curatorNote: string,
   bookshelfName: string
+}
+export interface TabInfo {
+  url: string;
+  title: string;
 }

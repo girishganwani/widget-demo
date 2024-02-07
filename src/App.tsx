@@ -1,29 +1,66 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import './App.css'
 import FormFieldsConfig from './configs/amplify.form.config.json'
 
-import LoadingScreen from "./components/LoadingScreen"
 import FullWidget from "./components/FullWidget"
-import { IURLResponse } from "./types/interfaces";
 import useCacheQuery from "./hooks/useCacheQuery";
+import { IURLResponse } from "./types/interfaces";
+import { getCurrentTabInfo } from "./utils";
 
-const requestConfig = {
-  method: 'GET',
-  url: '/users',
-  cacheKey: 'userSavedUrls',
-  expiryTime: 600,
-}
+const App = () => {
+  const { data: allSavedUrls, axiosRequest: fetchUrlsAxiosRequest } = useCacheQuery<IURLResponse[]>({ 
+    requestConfig: {
+      method: 'GET',
+      url: '/articles',
+      cacheKey: 'articles',
+    }
+  });
 
-function App() {
-  const [isLoading] = useState(false)
-   const { data, axiosRequest, error, loading } = useCacheQuery<IURLResponse[]>({ requestConfig });
+  const { axiosRequest: saveUrlAxiosRequest, loading: saveUrlLoading } = useCacheQuery<IURLResponse>({ 
+    requestConfig: {
+      method: 'POST',
+      url: '/articles',
+      cacheKey: 'articles',
+    }
+  });
 
   useEffect(() => {
-    axiosRequest();
+    fetchUrlsAxiosRequest();
   }, []);
 
+  useEffect(() => {
+    if (allSavedUrls) {
+      const saveCurrentUrlAsArticle = async () => {
+        try {
+          let currentTab;
+          if (typeof chrome !== "undefined" && chrome.tabs) {
+            const tabInfo = await getCurrentTabInfo();
+            currentTab = { url: tabInfo.url, title: tabInfo.title };
+          } else {
+            currentTab = { url: window.location.href, title: document.title };
+          }
+
+          const urlAlreadySaved = allSavedUrls?.find(url => url.website === currentTab.url);
+          if (!urlAlreadySaved?.website) {
+            const newArticle = {
+              title: currentTab.title,
+              website: currentTab.url,
+              curatorNote: '',
+              bookshelfName: ''
+            };
+            saveUrlAxiosRequest({ body: newArticle });
+          }
+        }
+        catch (error) {
+          console.error('Error saving the current URL as an article:', error);
+        }
+      };
+      saveCurrentUrlAsArticle();
+    }
+  }, [allSavedUrls]);
+  
 
   return (
     <Authenticator formFields={FormFieldsConfig} >
@@ -32,10 +69,7 @@ function App() {
           <h1>Hello {user?.signInDetails?.loginId}</h1>
           <button onClick={signOut}>Sign out</button>
           <div className="font-Raleway">
-            {isLoading ? 
-            <LoadingScreen isLoading={isLoading}/> : 
-            <FullWidget isLoading={isLoading}/>
-            }
+            <FullWidget isLoading={saveUrlLoading} />
           </div>
         </>
       )}
