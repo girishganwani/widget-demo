@@ -34,7 +34,7 @@ const App = () => {
     if (allSavedUrls) {
       const saveCurrentUrlAsArticle = async () => {
         try {
-          let currentTab;
+          let currentTab:any;
           if (typeof chrome !== "undefined" && chrome.tabs) {
             const tabInfo = await getCurrentTabInfo();
             currentTab = { url: tabInfo.url, title: tabInfo.title };

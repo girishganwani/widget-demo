@@ -6,6 +6,74 @@
       "website": "http://localhost:5173/",
       "curatorNote": "",
       "bookshelfName": ""
+    },
+    {
+      "id": "efdc",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "a8e5",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "2f4e",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "a8c8",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "690b",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "563f",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "23d5",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "f575",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "c561",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "4360",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "261d",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "e9dc",
+      "curatorNote": "",
+      "bookshelfName": ""
+    }
+  ],
+  "recommended": [
+    {
+      "id": "2",
+      "title": "Recommanded Reads",
+      "articleURL": "test",
+      "websiteURL": "test"
     }
   ]
 }

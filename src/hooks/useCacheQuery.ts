@@ -3,6 +3,7 @@ import axiosInstance from '../axios';
 import { LocalStorageData, useCacheQueryProps } from "../types/interfaces";
 
 const useCacheQuery = <T>(initialConfig: useCacheQueryProps<T>) => {
+  console.log("INTI: ", initialConfig)
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -24,15 +25,17 @@ const useCacheQuery = <T>(initialConfig: useCacheQueryProps<T>) => {
         const cachedItem = localStorage.getItem(cacheKey);
         const cachedData: LocalStorageData<T> | null = cachedItem ? JSON.parse(cachedItem) : null;
 
+        console.log("ConsoleLog1...")
+        console.log("cachekey",cacheKey, "cachedItem", cachedItem, "cachedData", cachedData)
         if (cachedData && cachedData.data && (!cachedData.expiredTime || cachedData.expiredTime > Date.now())) {
           setData(cachedData.data);
           setLoading(false);
           return;
         }
       }
-
+      console.log("Before..")
       const response = await axiosInstance(requestOptions);
-
+      console.log("ConsoleLog2...")
       if (config.requestConfig.cacheKey) {
         const cacheKey = config.requestConfig.cacheKey;
         const cachedItem = localStorage.getItem(cacheKey);

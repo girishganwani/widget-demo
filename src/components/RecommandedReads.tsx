@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { VscLinkExternal } from 'react-icons/vsc'
+import { IURLResponse } from '../types/interfaces'
+import useCacheQuery from '../hooks/useCacheQuery'
 // import { IURLResponse } from '../types/interfaces'
 // import useCacheQuery from '../hooks/useCacheQuery'
 
@@ -106,20 +108,21 @@ const articles = [
   },
 ]
 
-// const requestConfig = {
-//   method: 'GET',
-//   url: '/articles/recommended',
-//   cacheKey: 'recommendedUrls',
-//   expiryTime: 600,
-// }
+const requestConfig = {
+  method: 'GET',
+  url: '/recommended',
+  cacheKey: 'recommendedUrls',
+}
 
 const RecommandedReads = () => {
   const [visibleArticle, setVisibleArticle] = useState(4)
-  // const { data, axiosRequest, error, loading } = useCacheQuery<IURLResponse[]>({ requestConfig });
+  const { data, axiosRequest, error, loading } = useCacheQuery<IURLResponse[]>({ requestConfig });
 
-  // useEffect(() => {
-  //   axiosRequest();
-  // },[]);
+  console.log("DATA: ",data, "AXIOSREQ: ",axiosRequest, "ERROR: ",error, "LOADING: ",loading)
+
+  useEffect(() => {
+    axiosRequest();
+  },[]);
 
   const loadMore = () => {
     setVisibleArticle(prev => prev + 4);
