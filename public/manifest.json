@@ -1,14 +1,22 @@
 {
-  "name": "My Article",
-  "description": "Open your favourite Article",
+  "name": "Widget",
+  "description": "Widget",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-    "default_title": "My Articles",
+    "default_title": "Widget",
     "default_popup": "index.html",
     "default_icon": {
       "16": "article.png",
       "128": "article.png"
     }
-  } 
+  },
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
 }

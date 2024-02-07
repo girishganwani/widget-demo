@@ -1,19 +1,22 @@
-import LoadingScreen from './LoadingScreen'
+import { useState } from 'react';
+import CurrentArticle from './CurrentArticle'
 import { Button } from './Button';
 import RecommandedReads from './RecommandedReads';
 import PersonalLibModal from './PersonalLibModal';
-import { useState } from 'react';
+// import Context from '../context';
+// import { IContext } from '../types/interfaces';
 
-type Props = {
-  isLoading: boolean
-}
+const FullWidget = () => {
+  const [showPersonalLibModal, setShowPersonalLibModal] = useState<boolean>(false);
+  // const { signOut } = useContext(Context) as IContext;
 
-const FullWidget = ({isLoading} : Props ) => {
-  const [showPersonalLibModal, setShowPersonalLibModal] = useState<boolean>(false)
   return (
-    <div className='w-[432px] bg-[#FBF9FC] px-3 py-3 flex flex-col gap-3 rounded-xl'>
-      <LoadingScreen isLoading={isLoading}/>
-      <h2 className='text-[17px] font-medium text-[#343334B5]'>ADD TO</h2>
+    <div className='w-[432px] bg-[#FBF9FC] px-3 py-3 flex flex-col gap-3 rounded-xl relative z-0'>
+      <CurrentArticle />
+      <h2 className='text-[17px] font-medium text-[#343334B5] w-full flex justify-between'>
+        ADD TO
+        {/* <span onClick={signOut}>Signout</span> */}
+      </h2>
       <div className='flex justify-between'>
         <div>
         <Button 
@@ -24,7 +27,7 @@ const FullWidget = ({isLoading} : Props ) => {
         {showPersonalLibModal && <PersonalLibModal/>}
         </div>
         <div>
-        <Button title="Community library"/>
+        <Button style={{ backgroundColor: 'rgb(243 244 246 / var(--tw-bg-opacity))', cursor: 'default' }} title="Community library"/>
         </div>
       </div>
       <RecommandedReads/>

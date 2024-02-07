@@ -3,13 +3,15 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 type ButtonProps = {
  title : string
  setShowPersonalLibModal ?: any
- showPersonalLibModal ?: boolean
+ showPersonalLibModal ?: boolean;
+ style?: any;
 }
 
-export const Button = ({title, setShowPersonalLibModal, showPersonalLibModal}: ButtonProps) => {
+export const Button = ({ title, setShowPersonalLibModal, showPersonalLibModal, style }: ButtonProps) => {
   return (
     <button 
-    className='flex items-center w-[193px] h-[47px] justify-center text-[#940FAF] font-medium bg-white border-[#DBC9E5] text-[18px] gap-[2px] rounded-xl border-[1px]'
+    style={style}
+    className='flex items-center w-[193px] h-[47px] justify-center text-[#940FAF] font-medium bg-white border-[#DBC9E5] text-[18px] gap-[2px] rounded-xl border-[1px'
     onClick={() => setShowPersonalLibModal(!showPersonalLibModal)}
     >
       {title}

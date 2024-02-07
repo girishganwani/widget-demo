@@ -1,0 +1,189 @@
+{
+  "articles": [
+    {
+      "id": "bdea",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/on%20tomcritchlow.com",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "8b18",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "11b3",
+      "title": "Vite + React + TS",
+      "website": "http://127.0.0.1:5173/",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "6b4f",
+      "title": "Vite + React + TS",
+      "website": "http://127.0.0.1:5173/",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "5ed4",
+      "title": "widget – Figma",
+      "website": "https://www.figma.com/file/BVaDrCcpoPu2sjaV2Z0cLK/widget?type=design&node-id=0-1&mode=design&t=j2K7Uh7sx4w6VL6R-0",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "149b",
+      "title": "widget-demo/src/components/LoadingScreen.tsx at 7-feb-24 · girishganwani/widget-demo",
+      "website": "https://github.com/girishganwani/widget-demo/blob/7-feb-24/src/components/LoadingScreen.tsx",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "876b",
+      "title": "getirdev / market-courier-service / package.json — Bitbucket",
+      "website": "https://bitbucket.org/getirdev/market-courier-service/src/master/package.json",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "78fa",
+      "title": "localhost:8081/documentation",
+      "website": "http://localhost:8081/documentation",
+      "curatorNote": "",
+      "bookshelfName": ""
+    },
+    {
+      "id": "6c5e",
+      "title": "ChatGPT",
+      "website": "https://chat.openai.com/c/b6b88dbb-ed29-45b4-a862-5ab0268ab7c4",
+      "curatorNote": "",
+      "bookshelfName": ""
+    }
+  ],
+  "recommended": [
+    {
+      "id": "1",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "2",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    },
+    {
+      "id": "3",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "4",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    },
+    {
+      "id": "5",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "6",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    },
+    {
+      "id": "7",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "8",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    },
+    {
+      "id": "9",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "10",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    },
+    {
+      "id": "11",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "12",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    },
+    {
+      "id": "13",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "14",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    },
+    {
+      "id": "15",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "16",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    },
+    {
+      "id": "17",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "18",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    },
+    {
+      "id": "19",
+      "title": "Vite + React + TS",
+      "articleURL": "http://localhost:573/on%20tomcritchlow.com",
+      "websiteBaseURL": "123"
+    },
+    {
+      "id": "20",
+      "title": "Vite + React + TS",
+      "website": "http://localhost:5173/",
+      "websiteURL": "456"
+    }
+  ]
+}

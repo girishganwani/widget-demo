@@ -1,21 +1,32 @@
-import { useState } from "react"
-import LoadingScreen from "./components/LoadingScreen"
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import './App.css'
+import FormFieldsConfig from './configs/amplify.form.config.json'
+
 import FullWidget from "./components/FullWidget"
-// import Test from "./components/Test"
+import Context from "./context";
+import useArticles from './hooks/useArticles';
 
-
-function App() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+const App = () => {
+  const { currentArticle, saveUrlLoading, handleDelete } = useArticles();
   
   return (
-    <div className="font-Raleway">
-      {isLoading ? 
-      <LoadingScreen isLoading={isLoading}/> : 
-      <FullWidget isLoading={isLoading}/>
-      }
-      {/* <Test/> */}
-    </div>
+    <Authenticator formFields={FormFieldsConfig} >
+      {({ signOut }) => (
+        <Context.Provider value={{
+          currentArticle,
+          saveUrlLoading,
+          handleDelete,
+          signOut,
+        }}>
+          <button onClick={signOut}>Sign out</button>
+          <div className="font-Raleway">
+            <FullWidget />
+          </div>
+        </Context.Provider>
+      )}
+    </Authenticator>
   )
 }
 
-export default App
+export default App;
