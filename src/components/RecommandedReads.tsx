@@ -28,7 +28,7 @@ const RecommandedReads = () => {
   return (
     <div className='flex flex-col gap-2 mt-2'>
       <h2 className='text-[17px] font-medium text-[#343334B5]'>RECOMMENDED READS</h2>
-      <div className='max-h-80 overflow-y-auto overflow-x-hidden space-y-2 scrollbar-hide'>
+      <div className='max-h-[230px] overflow-y-auto overflow-x-hidden space-y-2 scrollbar-hide'>
         {allRecommendedUrls?.slice(0, visibleArticle).map((item, index) => (
           <a href={item.articleURL} target='_blank' className='pb-0 flex'>
             <div className='w-[411px] h-[51px] border-[1px] p-1 border-[#DBC9E5] rounded-xl bg-white' key={index}>

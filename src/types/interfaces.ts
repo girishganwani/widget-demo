@@ -32,6 +32,12 @@ export interface IRecommendedArticle {
   websiteURL?: string
 }
 
+export interface IBookShelves {
+  id?: string,
+  name?: string,
+  articleNo?: number
+}
+
 export interface TabInfo {
   url: string;
   title: string;
@@ -39,7 +45,7 @@ export interface TabInfo {
 
 export interface IContext {
   currentArticle: IArticle | null;
-  saveUrlLoading: Boolean;
+  saveUrlLoading: boolean;
   handleDelete: (articleId: string) => void;
   signOut: ((data?: undefined) => void) | undefined;
 }
