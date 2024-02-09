@@ -27,10 +27,10 @@ const FullWidget = () => {
         {showPersonalLibModal && <PersonalLibModal/>}
         </div>
         <div>
-        <Button style={{ backgroundColor: 'rgb(243 244 246 / var(--tw-bg-opacity))', cursor: 'default' }} title="Community library"/>
+        <Button style={{ backgroundColor: 'rgb(243 244 246 / var(--tw-bg-opacity))', cursor: 'default', color: 'grey' }} title="Community library"/>
         </div>
       </div>
-      <RecommandedReads/>
+      <RecommandedReads showPersonalLibModal={showPersonalLibModal}/>
     </div>
   )
 }

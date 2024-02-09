@@ -3,7 +3,7 @@ import { VscLinkExternal } from 'react-icons/vsc'
 import useCacheQuery from '../hooks/useCacheQuery'
 import { IRecommendedArticle } from '../types/interfaces'
 
-const RecommandedReads = () => {
+const RecommandedReads = ({showPersonalLibModal}: {showPersonalLibModal: boolean}) => {
   const [visibleArticle, setVisibleArticle] = useState(4);
   const [isLoadBtnVisible, setIsLoadBtnVisible] = useState(false);
 
@@ -43,7 +43,7 @@ const RecommandedReads = () => {
           </a>
         ))}
       </div>
-      {!isLoadBtnVisible && 
+      {!isLoadBtnVisible && !showPersonalLibModal &&
       <button 
       className='w-[79px] h-[18px] bg-[#B9D1F8] text-[#940FAF] text-[9px] flex justify-center font-semibold rounded-lg items-center mt-2'
       onClick = {loadMore}

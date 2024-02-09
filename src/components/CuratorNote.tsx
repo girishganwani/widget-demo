@@ -14,9 +14,9 @@ const CuratorNote = ({ setIsCuratorNote }: CuratorNoteProps) => {
         </div>
         <hr className="w-[389px] -ml-2"/>
       </div>
-      <textarea rows={6} className="text-[9px] w-[372px]"/>
+      <textarea rows={6} className="text-[15px] w-[372px] p-1"/>
       <button 
-      className="w-[61px] h-[13px] text-[10px] font-semibold bg-[#9FBAE5] text-[#504874] ml-auto"
+      className="w-[70px] h-4 text-[13px] font-semibold flex p-[3px] items-center bg-[#9FBAE5] text-[#504874] ml-auto"
       >
         Save Note
       </button>

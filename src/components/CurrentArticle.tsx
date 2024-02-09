@@ -16,7 +16,7 @@ const CurrentArticle = () => {
       <div className="flex justify-between items-center mr-3">
         <PinButton/>
         {!isLoading && 
-        <button><RiDeleteBinLine fontSize={16} color="#504874" fontWeight={600} onClick={() => handleDelete(currentArticle!.id as string)} /></button>}
+        <button><RiDeleteBinLine fontSize={22} color="#504874" fontWeight={600} onClick={() => handleDelete(currentArticle!.id as string)} /></button>}
       </div>
       <div className="flex items-center gap-4">
         <p className="text-[23px] font-bold text-[#940FAF] ml-3 font-Anonymous">{currentArticle?.title}</p>

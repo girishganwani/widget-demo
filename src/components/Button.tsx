@@ -17,7 +17,7 @@ export const Button = ({ title, setShowPersonalLibModal, showPersonalLibModal, s
       {title}
       {showPersonalLibModal ? 
       <IoMdArrowDropup fontSize={25} className='mt-[2px] text-[#504874]'/> :
-      <IoMdArrowDropdown fontSize={25} className='mt-[2px] text-[#504874]'/>
+      <IoMdArrowDropdown fontSize={25} className='mt-[2px] text-[#504874]' style={style}/>
     }
     </button>
   )
