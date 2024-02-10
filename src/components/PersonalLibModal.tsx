@@ -22,7 +22,9 @@ const PersonalLibModal = () => {
   const recentShelves = allBookShelves?.slice(0, 4) || [];
   const allShelves = allBookShelves?.slice(4) || [];
   return (
-    <div className="absolute z-10 w-[409px] min-h-[310px] bg-white p-3 pt-0 rounded-xl border-[1px] border-[#DBC9E5]">
+    <div 
+    className="absolute z-10 w-[409px] min-h-[310px] bg-white p-3 pt-0 rounded-se-xl rounded-b-xl border-[1px] border-[#DBC9E5]"
+    >
       <RecentShelves recentShelves={recentShelves}/>
       <AllShelves allShelves={allShelves}/>
     </div>

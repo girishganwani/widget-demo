@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import useCacheQuery from "../hooks/useCacheQuery";
 import { IBookShelves } from "../types/interfaces";
 
-const AddNewShelf = () => {
+const AddNewShelf = ({setIsNewShelfClicked, isNewShelfClicked}) => {
   const [bookshelfName, setBookShelfName] = useState("");
   const { axiosRequest: saveBookShelvesAxiosRequest, loading: saveBookShelfLoading } = useCacheQuery<IBookShelves[]>({ 
     requestConfig: {
@@ -20,6 +20,7 @@ const handleSubmit = async (e : FormEvent<HTMLElement>) => {
     articleNo :11
   }});
   setBookShelfName("");
+  setIsNewShelfClicked(!isNewShelfClicked);
 }
 
   return (
@@ -29,13 +30,14 @@ const handleSubmit = async (e : FormEvent<HTMLElement>) => {
         <label className="text-[10px]">Name</label>
         <input
           type="text"
+          value={bookshelfName}
           onChange={(e) => setBookShelfName(e.target.value)}
           placeholder="Name this bookshelf"
           className="w-[379px] h-[28px] bg-[#EDEFF8] boder-[1px] outline-none placeholder:text-[#C3D7FF] px-1 text-[9px] text-black border-[#C3D7FF] border-[1px] rounded-sm "
           />
         <button 
         type="submit"
-        className="bg-[#940FAF] text-white mt-2 text-[10px] font-medium w-[194px] h-[18px] mx-auto rounded-sm"
+        className="bg-[#940FAF] text-white mt-6 text-[10px] font-medium w-[194px] h-[18px] ml-20 rounded-sm"
         >
           Create Shelf
         </button>

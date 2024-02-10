@@ -8,17 +8,15 @@ import PersonalLibModal from './PersonalLibModal';
 
 const FullWidget = () => {
   const [showPersonalLibModal, setShowPersonalLibModal] = useState<boolean>(false);
-  // const { signOut } = useContext(Context) as IContext;
 
   return (
-    <div className='w-[432px] bg-[#FBF9FC] px-3 py-3 flex flex-col gap-3 rounded-xl relative z-0'>
-      <CurrentArticle />
+    <div className={`w-[432px] bg-[#FBF9FC] px-3 py-3 flex flex-col gap-3 rounded-xl relative z-0 ${showPersonalLibModal ? ' bg-gray-200' : 'bg-[#FBF9FC]'}`}>
+      <CurrentArticle/>
       <h2 className='text-[17px] font-medium text-[#343334B5] w-full flex justify-between'>
         ADD TO
-        {/* <span onClick={signOut}>Signout</span> */}
       </h2>
       <div className='flex justify-between'>
-        <div>
+        <div >
         <Button 
         title= "Personal library" 
         setShowPersonalLibModal= {setShowPersonalLibModal}

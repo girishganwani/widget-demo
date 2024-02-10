@@ -24,7 +24,7 @@ const AllShelves = ({ allShelves }: { allShelves: IBookShelves[] }) => {
   return (
     <div>
       {isNewShelfClicked ? 
-      <AddNewShelf/> : 
+      <AddNewShelf setIsNewShelfClicked={setIsNewShelfClicked} isNewShelfClicked={isNewShelfClicked}/> : 
       <div className="flex flex-col mt-1 gap-1">
       <p className="text-[15px]">All Shelves</p>
         <div className="flex flex-wrap items-center">
