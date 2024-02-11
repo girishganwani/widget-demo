@@ -66,7 +66,7 @@ const handleSubmit = async (e : FormEvent<HTMLElement>) => {
           />
         <button 
           type="submit"
-          className="bg-[#940FAF] text-white mt-2 text-[10px] font-medium w-[194px] h-[18px] mx-auto rounded-sm"
+          className="bg-[#940FAF] text-white mt-4 text-[12px] font-medium w-[194px] h-[18px] ml-[90px] rounded-sm"
           disabled={saveBookShelfLoading}
         >
           Create Shelf

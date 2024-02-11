@@ -29,11 +29,11 @@ const CurrentArticle = () => {
         <button><RiDeleteBinLine fontSize={22} color="#504874" fontWeight={600} onClick={() => handleDelete(currentArticle!.articleURL as string)} /></button>}
       </div>
       <div className="flex items-center gap-4">
-        <p className="text-[23px] font-bold text-[#940FAF] ml-3 font-Anonymous">{title}</p>
+        <p className="text-[23px] font-bold text-[#940FAF] ml-3 font-Anonymous line-clamp-2">{title}</p>
         {isLoading && <LoadingSpinner/>}
       </div>
       <div className="text-[12px] font-Raleway font-semibold text-[#504874] mb-[14px] mx-3 flex justify-between items-center">
-        <p>{!isArticleDeleted && currentArticle?.websiteBaseURL}</p>
+        <p className="line-clamp-1 w-2/3  ">{!isArticleDeleted && currentArticle?.websiteBaseURL}</p>
         {currentArticle?.curatorNote && !isArticleDeleted && (
           <button className="flex gap-1 items-center" onClick={() => setIsCuratorNote(!isCuratorNote)}>
             <RxViewNone fontSize={20}/>

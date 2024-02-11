@@ -11,7 +11,7 @@ const RecentShelves = ({ recentShelves }: { recentShelves: IBookShelves[] }) => 
   return (
     <div className="flex flex-col gap-1 mt-1 divide-[#DBC9E5] divide-[1px]">
       <p className="text-[15px]">Recent</p>
-      <div className="flex justify-between mx-3">
+      <div className="flex justify-between mr-3">
         {recentShelves.map((item, index) => (
           <div className="w-[66px] mr-3" key={item.name}>
             <div className="h-14 w-14 rounded-sm" style={{background: backgroundColors[index]}}/>

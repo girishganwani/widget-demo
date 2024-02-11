@@ -34,9 +34,9 @@ const AllShelves = ({ allShelves, setShelves, shelves }: AllShelvesProps) => {
       <p className="text-[15px]">All Shelves</p>
         <div className="flex flex-wrap items-center">
             {allShelves?.map(item => (
-              <div className="h-10 w-1/3 flex flex-row mb-4 gap-1" key={item?.name}>
-                <div className="w-11 h-11 rounded-sm" style={{background: backgroundColors[selectBackground()]}}/>
-                <div className="w-16 h-[36px] m-[1px] my-auto" style={{lineHeight: "14px"}}>
+              <div className="h-10 w-1/2 flex flex-row mb-6 gap-1" key={item?.name}>
+                <div className="w-14 h-14 rounded-sm" style={{background: backgroundColors[selectBackground()]}}/>
+                <div className="w-24 h-[36px] m-[1px] my-auto" style={{lineHeight: "14px"}}>
                   <p className="text-[13px] line-clamp-2">{item?.name}</p>
                   <p className="text-[10px]">{`${item?.numberOfArticles} articles`}</p>
                 </div>
@@ -44,7 +44,7 @@ const AllShelves = ({ allShelves, setShelves, shelves }: AllShelvesProps) => {
           ))}
         </div>
         <button
-        className="w-[59px] h-[17px] rounded-md flex items-center  ml-auto justify-center text-white bg-[#940FAF] text-[8px] font-medium"
+        className="w-24 h-5 rounded-md flex items-center mx-auto justify-center text-white bg-[#940FAF] text-[12px] font-medium"
         onClick={() => setIsNewShelfClicked(true)}
         >
           <LuPlus fontSize={11}/>
