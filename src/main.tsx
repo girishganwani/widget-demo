@@ -11,6 +11,14 @@ Amplify.configure({
       userPoolClientId: '2hm64gad4akjd2c93rgkuttfec',
       signUpVerificationMethod: 'code',
     }
+  },
+  API: {
+    REST: {
+      widget: {
+        endpoint: 'https://ieeux7d90b.execute-api.us-east-1.amazonaws.com/prod-prod-v1-widget',
+        region: 'us-east-1' // Optional
+      }
+    }
   }
 });
 

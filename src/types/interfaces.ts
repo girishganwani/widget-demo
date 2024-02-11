@@ -3,6 +3,8 @@ import { AxiosRequestConfig } from 'axios';
 export type useCacheQueryProps<T> = {
   requestConfig: AxiosRequestConfig & { cacheKey?: string, expiryTime?: number };
   body?: Partial<T>;
+  authToken?: string;
+  articleData?: Partial<T>,
 }
 
 export interface AxiosResponse<T> {
@@ -18,13 +20,28 @@ export type LocalStorageData<T> = {
 }
 
 export interface IArticle {
-  id?: string,
   title?: string,
-  website?: string,
+  websiteBaseURL?: string,
+  articleURL?: string,
   curatorNote?: string,
-  bookshelfName?: string
+  bookshelfName?: string,
+  url?: string,
+  note?: string,
 }
-
+export interface TabInfo {
+  websiteBaseURL: string;
+  articleURL: string;
+  title: string;
+}
+export interface IContext {
+  currentArticle: IArticle | null;
+  saveUrlLoading: Boolean;
+  handleDelete: (articleId: string) => void;
+  isArticleDeleted: boolean;
+  updateArticle: (articleId: string, body: Partial<IArticle>) => void;
+  setCurrentArticle: React.Dispatch<React.SetStateAction<IArticle | null>>;
+  authToken: string | undefined;
+}
 export interface IRecommendedArticle {
   id?: string,
   title?: string,
@@ -33,19 +50,7 @@ export interface IRecommendedArticle {
 }
 
 export interface IBookShelves {
-  id?: string,
   name?: string,
-  articleNo?: number
-}
-
-export interface TabInfo {
-  url: string;
-  title: string;
-}
-
-export interface IContext {
-  currentArticle: IArticle | null;
-  saveUrlLoading: boolean;
-  handleDelete: (articleId: string) => void;
-  signOut: ((data?: undefined) => void) | undefined;
+  numberOfArticles?: number,
+  newBookshelfName?: string;
 }

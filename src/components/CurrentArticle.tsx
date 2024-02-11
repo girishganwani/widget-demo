@@ -2,35 +2,51 @@ import LoadingSpinner from "./LoadingSpinner"
 import PinButton from "./PinButton"
 import { RiDeleteBinLine } from "react-icons/ri";
 import { LuPencilLine } from "react-icons/lu";
+import { RxViewNone } from "react-icons/rx";
 import { useContext, useState } from "react";
 import Context from "../context";
 import { IContext } from "../types/interfaces";
 import CuratorNote from "./CuratorNote";
 
 const CurrentArticle = () => {
+  const { currentArticle, saveUrlLoading: isLoading, handleDelete, isArticleDeleted } = useContext(Context) as IContext;
   const [isCuratorNote, setIsCuratorNote] = useState(false);
-  const { currentArticle, saveUrlLoading: isLoading, handleDelete } = useContext(Context) as IContext;
+  const curatorNoteVal = currentArticle?.curatorNote ?? '';
+  let title = currentArticle?.title;
+
+  if (isArticleDeleted) { 
+    title = `Article Deleted`;
+  }
+  else if (isLoading) { 
+    title = `Article Archiving`;
+  }
 
   return (
     <div className="w-[411px] min-h-[155px] bg-[#edddf3] rounded-xl flex flex-col justify-between border-[1px] border-[#504874]">
       <div className="flex justify-between items-center mr-3">
         <PinButton/>
-        {!isLoading && 
-        <button><RiDeleteBinLine fontSize={22} color="#504874" fontWeight={600} onClick={() => handleDelete(currentArticle!.id as string)} /></button>}
+        {!isLoading && !isArticleDeleted && currentArticle?.articleURL && 
+        <button><RiDeleteBinLine fontSize={22} color="#504874" fontWeight={600} onClick={() => handleDelete(currentArticle!.articleURL as string)} /></button>}
       </div>
       <div className="flex items-center gap-4">
-        <p className="text-[23px] font-bold text-[#940FAF] ml-3 font-Anonymous">{currentArticle?.title}</p>
+        <p className="text-[23px] font-bold text-[#940FAF] ml-3 font-Anonymous">{title}</p>
         {isLoading && <LoadingSpinner/>}
       </div>
       <div className="text-[12px] font-Raleway font-semibold text-[#504874] mb-[14px] mx-3 flex justify-between items-center">
-      <p>{currentArticle?.website}</p>
-      {!isLoading && 
-      <button className="flex gap-1 items-center" onClick={() => setIsCuratorNote(!isCuratorNote)}>
-        <LuPencilLine fontSize={20}/>
-        Add Note
-      </button>}
+        <p>{!isArticleDeleted && currentArticle?.websiteBaseURL}</p>
+        {currentArticle?.curatorNote && !isArticleDeleted && (
+          <button className="flex gap-1 items-center" onClick={() => setIsCuratorNote(!isCuratorNote)}>
+            <RxViewNone fontSize={20}/>
+            View Note
+          </button>
+        )}    
+        {!isLoading && !isArticleDeleted && currentArticle && !currentArticle?.curatorNote && 
+        <button className="flex gap-1 items-center" onClick={() => setIsCuratorNote(!isCuratorNote)}>
+          <LuPencilLine fontSize={20}/>
+          Add Note
+        </button>}
       </div>
-      {!isLoading && isCuratorNote && <CuratorNote setIsCuratorNote={setIsCuratorNote} />}
+      {!isLoading && isCuratorNote && <CuratorNote value={curatorNoteVal} setIsCuratorNote={setIsCuratorNote} />}
     </div>
   )
 }

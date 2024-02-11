@@ -9,4 +9,4 @@ const PinButton = () => {
   )
 }
 
-export default PinButton
+export default PinButton;

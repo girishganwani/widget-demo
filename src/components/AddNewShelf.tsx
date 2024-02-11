@@ -1,25 +1,56 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import useCacheQuery from "../hooks/useCacheQuery";
-import { IBookShelves } from "../types/interfaces";
+import { IBookShelves, IContext } from "../types/interfaces";
+import Context from "../context";
 
-const AddNewShelf = () => {
+type AddNewShelfProps = {
+  setIsNewShelfClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  isNewShelfClicked: boolean;
+  setShelves: React.Dispatch<React.SetStateAction<IBookShelves[]>>;
+  shelves: IBookShelves[]
+}
+
+const AddNewShelf = ({ setIsNewShelfClicked, isNewShelfClicked, setShelves, shelves }: AddNewShelfProps) => {
+  const { authToken } = useContext(Context) as IContext;
   const [bookshelfName, setBookShelfName] = useState("");
-  const { axiosRequest: saveBookShelvesAxiosRequest, loading: saveBookShelfLoading } = useCacheQuery<IBookShelves[]>({ 
+  const { axiosRequest: saveBookShelvesAxiosRequest, loading: saveBookShelfLoading } = useCacheQuery<IBookShelves>({ 
     requestConfig: {
       method: 'POST',
-      url: '/addbookshelf',
+      url: '/v1/bookshelves/private',
       cacheKey: 'bookShelves',
     }
   });
 
 const handleSubmit = async (e : FormEvent<HTMLElement>) => {
   e.preventDefault();
-  await saveBookShelvesAxiosRequest({body: {
-    id: "fsfsfsf",
-    name: bookshelfName,
-    articleNo :11
-  }});
+  if (bookshelfName) {
+    await saveBookShelvesAxiosRequest({
+      body: {
+        newBookshelfName: bookshelfName,
+      },
+      authToken,
+      articleData: {
+        newBookshelfName: bookshelfName,
+        name: bookshelfName,
+        numberOfArticles: 0,
+      }
+    });
+    setShelves(
+      [
+        ...shelves,
+        {
+          newBookshelfName: bookshelfName,
+          name: bookshelfName,
+          numberOfArticles: 0,
+        }
+      ]
+    );
+  }
+  else {
+    alert('Please enter a book shelve name')
+  }
   setBookShelfName("");
+  setIsNewShelfClicked(!isNewShelfClicked);
 }
 
   return (
@@ -34,8 +65,9 @@ const handleSubmit = async (e : FormEvent<HTMLElement>) => {
           className="w-[379px] h-[28px] bg-[#EDEFF8] boder-[1px] outline-none placeholder:text-[#C3D7FF] px-1 text-[9px] text-black border-[#C3D7FF] border-[1px] rounded-sm "
           />
         <button 
-        type="submit"
-        className="bg-[#940FAF] text-white mt-2 text-[10px] font-medium w-[194px] h-[18px] mx-auto rounded-sm"
+          type="submit"
+          className="bg-[#940FAF] text-white mt-2 text-[10px] font-medium w-[194px] h-[18px] mx-auto rounded-sm"
+          disabled={saveBookShelfLoading}
         >
           Create Shelf
         </button>
@@ -44,4 +76,4 @@ const handleSubmit = async (e : FormEvent<HTMLElement>) => {
   )
 }
 
-export default AddNewShelf
+export default AddNewShelf;

@@ -1,5 +1,6 @@
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
+
 import './App.css'
 import FormFieldsConfig from './configs/amplify.form.config.json'
 
@@ -8,18 +9,20 @@ import Context from "./context";
 import useArticles from './hooks/useArticles';
 
 const App = () => {
-  const { currentArticle, saveUrlLoading, handleDelete } = useArticles();
-  
+  const { currentArticle, saveUrlLoading, handleDelete, isArticleDeleted, updateArticle, setCurrentArticle, authToken } = useArticles();
+
   return (
     <Authenticator formFields={FormFieldsConfig} >
-      {({ signOut }) => (
+      {() => (
         <Context.Provider value={{
           currentArticle,
           saveUrlLoading,
           handleDelete,
-          signOut,
+          isArticleDeleted,
+          updateArticle,
+          setCurrentArticle,
+          authToken,
         }}>
-          <button onClick={signOut}>Sign out</button>
           <div className="font-Raleway">
             <FullWidget />
           </div>
