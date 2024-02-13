@@ -13,7 +13,7 @@ const FullWidget = () => {
       <CurrentArticle />
       <h2 className='text-[17px] font-medium text-[#343334B5] w-full flex justify-between'>
         ADD TO
-        <span className="cursor-pointer" onClick={() => signOut()}>SignOut</span>
+        <span className="cursor-pointer" onClick={() => signOut()}>Sign Out</span>
       </h2>
       <div className='flex justify-between'>
         <div>
