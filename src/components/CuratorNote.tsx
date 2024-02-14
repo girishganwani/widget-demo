@@ -30,7 +30,7 @@ const CuratorNote = ({ setIsCuratorNote, value }: CuratorNoteProps) => {
   }
 
   return (
-    <div className="w-[389px] mx-auto mb-3 rounded-xl flex flex-col p-2 bg-[#FBF9FC] gap-3">
+    <div className="w-[389px] mx-auto mb-3 rounded-xl flex flex-col p-2 -mt-5 bg-[#FBF9FC] gap-3">
       <div className="divide-[#9FBAE5]">
         <div className="flex items-center justify-between text-[18px] text-[#940FAF] font-semibold">
           <h1>Curator's Note</h1>
