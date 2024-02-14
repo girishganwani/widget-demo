@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IArticle, TabInfo } from "../types/interfaces";
+import { IArticle, IBookShelves, TabInfo } from "../types/interfaces";
 import { getBaseURL, getCurrentTabInfo } from "../utils";
 import useCacheQuery from "./useCacheQuery";
 import { fetchAuthSession } from "aws-amplify/auth";
@@ -40,6 +40,23 @@ const useArticles = () => {
     }
   });
 
+  const { axiosRequest: updateShelveArticleRequest } = useCacheQuery<IBookShelves>({ 
+    requestConfig: {
+      method: 'PUT',
+      url: undefined,
+      cacheKey: 'bookShelves',
+    }
+  });
+
+  const { data: allBookShelves, axiosRequest: fetchBookShelvesAxiosRequest } = useCacheQuery<IBookShelves[]>({ 
+    requestConfig: {
+      method: 'GET',
+      url: '/v1/bookshelves',
+      cacheKey: 'bookShelves',
+    },
+    authToken,
+  });
+
   const [currentArticle, setCurrentArticle] = useState<IArticle | null>(null);
 
   const handleDelete = (articleURL: string) => {
@@ -68,7 +85,32 @@ const useArticles = () => {
       },
       authToken,
       articleData: body,
-    })
+    });
+
+  }
+
+  const updateShelveArticle = (articleURL: string | undefined, shelveName: string | undefined, noOfArticles: number | undefined) => {
+    if (articleURL && shelveName && typeof noOfArticles === 'number') {
+      updateShelveArticleRequest({
+        requestConfig: {
+          method: 'PUT',
+          url: `/v1/bookshelves/articles?url=${encodeURI(articleURL)}`,
+          cacheKey: 'articles',
+        },
+        body: {
+          newBookshelfName: shelveName,
+        },
+        authToken,
+        articleData: {
+          name: shelveName,
+          newBookshelfName: shelveName,
+          numberOfArticles: noOfArticles + 1,
+        },
+      })
+      setTimeout(() => {
+        fetchBookShelvesAxiosRequest();
+      }, 500)
+    }
   }
 
   useEffect(() => {
@@ -99,8 +141,9 @@ const useArticles = () => {
           if (typeof chrome !== "undefined" && chrome.tabs) {
             currentTab = await getCurrentTabInfo();
           } else {
-            currentTab = { websiteBaseURL: getBaseURL(window.location.href), articleURL: window.location.href, title: document.title };
-            // currentTab = { websiteBaseURL: 'https://medium.com', articleURL: 'https://levelup.gitconnected.com/the-5-paid-subscriptions-i-actually-use-in-2024-as-a-software-engineer-edd9949df58b?gi=caf93cf69b67', title: '5 Things I Learned About Leadership from the Death &amp; Rebirth of Microsoft | by Dare Obasanjo | Feb, 2024 | Medium' };
+            // currentTab = { websiteBaseURL: getBaseURL(window.location.href), articleURL: window.location.href, title: document.title };
+            const url = 'https://ponett.medium.com/my-own-personal-hell-thoughts-on-hazbin-hotel-1b226af317f5';
+            currentTab = { websiteBaseURL: getBaseURL(url) as string, articleURL: url, title: 'Picture Vector SVG Icon (226) - SVG Repo Picture Vector SVG Icon (226) - SVG Repo Picture Vector SVG Icon (226) - SVG Repo' };
           }
           const cachedData = allSavedUrls;
           const urlAlreadySaved = cachedData.find(url => url.articleURL === currentTab.articleURL);
@@ -137,7 +180,10 @@ const useArticles = () => {
     handleDelete,
     isArticleDeleted,
     updateArticle,
+    updateShelveArticle,
     authToken,
+    fetchBookShelvesAxiosRequest,
+    allBookShelves,
   }
 }
 

@@ -9,7 +9,7 @@ export default {
       fontFamily: {
         Anonymous: ['Anonymous Pro'],
         Raleway: ['Raleway']
-      }
+      },
     },
   },
   plugins: [],

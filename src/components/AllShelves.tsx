@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { LuPlus } from "react-icons/lu"
 import AddNewShelf from "./AddNewShelf"
-import { IBookShelves } from "../types/interfaces"
+import { IBookShelves, IContext } from "../types/interfaces"
+import Context from "../context"
 
 const backgroundColors = [
   "linear-gradient(90deg, rgba(191,137,175,1) 0%, rgba(217,133,148,1) 100%)",
@@ -21,40 +22,40 @@ type AllShelvesProps = {
 }
 
 const AllShelves = ({ allShelves, setShelves, shelves }: AllShelvesProps) => {
-  const [isNewShelfClicked, setIsNewShelfClicked] = useState(false)
-  const selectBackground = () => {
-    const randomIndex =  Math.floor(Math.random() * backgroundColors.length);
-    return randomIndex;
-  }
+  const { updateShelveArticle, currentArticle } = useContext(Context) as IContext;
+  const [isNewShelfClicked, setIsNewShelfClicked] = useState(false);
+
   return (
     <div>
-      {isNewShelfClicked ? 
-      <AddNewShelf setIsNewShelfClicked={setIsNewShelfClicked} setShelves={setShelves} isNewShelfClicked={isNewShelfClicked} shelves={shelves} /> : 
-      <div className="flex flex-col mt-1 gap-1">
-      <p className="text-[15px]">All Shelves</p>
-        <div className="flex flex-wrap items-center">
-            {allShelves?.map(item => (
-              <div className="h-10 w-1/2 flex flex-row mb-6 gap-1" key={item?.name}>
-                <div className="w-14 h-14 rounded-sm" style={{background: backgroundColors[selectBackground()]}}/>
-                <div className="w-24 h-[36px] m-[1px] my-auto" style={{lineHeight: "14px"}}>
-                  <p className="text-[13px] line-clamp-2">{item?.name}</p>
-                  <p className="text-[10px]">{`${item?.numberOfArticles} articles`}</p>
+      {
+      isNewShelfClicked ? 
+        <AddNewShelf setIsNewShelfClicked={setIsNewShelfClicked} setShelves={setShelves} isNewShelfClicked={isNewShelfClicked} shelves={shelves} /> : 
+        <div className="flex flex-col mt-1 gap-1">
+          <p className="text-[15px]">All Shelves</p>
+            <div className="flex flex-wrap items-center max-h-[190px] overflow-auto">
+                {allShelves?.map((item, index) => (
+                  <div className="h-10 w-1/2 flex flex-row mb-9 gap-1 cursor-pointer hover:scale-105" key={item?.name} onClick={() => updateShelveArticle(currentArticle?.articleURL, item.name, item.numberOfArticles)}>
+                    <div className="w-16 h-16 rounded-sm" style={{background: backgroundColors[index % backgroundColors.length]}}/>
+                    <div className="w-24 h-[36px] m-[1px] my-auto" style={{lineHeight: "14px"}}>
+                      <p className="text-[13px] line-clamp-2">{item?.name}</p>
+                      <p className="text-[10px]">{`${item?.numberOfArticles} articles`}</p>
+                    </div>
                 </div>
+              ))}
             </div>
-          ))}
+            <div className="flex justify-end">
+              <button
+                className="w-24 h-5 rounded-md flex items-center justify-center text-white bg-[#940FAF] text-[12px] font-medium"
+                onClick={() => setIsNewShelfClicked(true)}
+              >
+                <LuPlus fontSize={11}/>
+                New Shelf
+              </button> 
+            </div>
         </div>
-        <button
-        className="w-24 h-5 rounded-md flex items-center mx-auto justify-center text-white bg-[#940FAF] text-[12px] font-medium"
-        onClick={() => setIsNewShelfClicked(true)}
-        >
-          <LuPlus fontSize={11}/>
-          New Shelf
-        </button> 
-    </div>
        }
-      
     </div>
   )
 }
 
-export default AllShelves
+export default AllShelves;
