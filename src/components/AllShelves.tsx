@@ -24,10 +24,7 @@ type AllShelvesProps = {
 const AllShelves = ({ allShelves, setShelves, shelves }: AllShelvesProps) => {
   const { updateShelveArticle, currentArticle } = useContext(Context) as IContext;
   const [isNewShelfClicked, setIsNewShelfClicked] = useState(false);
-  const selectBackground = () => {
-    const randomIndex =  Math.floor(Math.random() * backgroundColors.length);
-    return randomIndex;
-  }
+ 
   return (
     <div>
       {
@@ -36,9 +33,9 @@ const AllShelves = ({ allShelves, setShelves, shelves }: AllShelvesProps) => {
         <div className="flex flex-col mt-1 gap-1">
           <p className="text-[15px]">All Shelves</p>
             <div className="flex flex-wrap items-center max-h-[190px] overflow-auto">
-                {allShelves?.map(item => (
-                  <div className="h-10 w-1/2 flex flex-row mb-6 gap-1 cursor-pointer" key={item?.name} onClick={() => updateShelveArticle(currentArticle?.articleURL, item.name, item.numberOfArticles)}>
-                    <div className="w-14 h-14 rounded-sm" style={{background: backgroundColors[selectBackground()]}}/>
+                {allShelves?.map((item, index) => (
+                  <div className="h-10 w-1/2 flex flex-row mb-9 gap-1 cursor-pointer" key={item?.name} onClick={() => updateShelveArticle(currentArticle?.articleURL, item.name, item.numberOfArticles)}>
+                    <div className="w-16 h-16 rounded-sm" style={{background: backgroundColors[index % backgroundColors.length]}}/>
                     <div className="w-24 h-[36px] m-[1px] my-auto" style={{lineHeight: "14px"}}>
                       <p className="text-[13px] line-clamp-2">{item?.name}</p>
                       <p className="text-[10px]">{`${item?.numberOfArticles} articles`}</p>
