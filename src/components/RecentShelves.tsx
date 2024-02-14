@@ -1,4 +1,6 @@
-import { IBookShelves } from "../types/interfaces";
+import { useContext } from "react";
+import Context from "../context";
+import { IBookShelves, IContext } from "../types/interfaces";
 
 const backgroundColors = [
   "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(48,76,137,1) 71%)",
@@ -7,13 +9,19 @@ const backgroundColors = [
   "linear-gradient(177deg, rgba(221,48,83,1) 35%, rgba(255,0,241,1) 80%)"
 ]
 
-const RecentShelves = ({ recentShelves }: { recentShelves: IBookShelves[] }) => {
+type RecentShelvesProps = {
+  recentShelves: IBookShelves[];
+}
+
+const RecentShelves = ({ recentShelves }: RecentShelvesProps) => {
+  const { updateShelveArticle, currentArticle } = useContext(Context) as IContext;
+
   return (
     <div className="flex flex-col gap-1 mt-1 divide-[#DBC9E5] divide-[1px]">
       <p className="text-[15px]">Recent</p>
       <div className="flex justify-between mr-3">
         {recentShelves.map((item, index) => (
-          <div className="w-[66px] mr-3" key={item.name}>
+          <div className="w-[66px] mr-3 cursor-pointer" key={item.name} onClick={() => updateShelveArticle(currentArticle?.articleURL, item.name, item.numberOfArticles)}>
             <div className="h-14 w-14 rounded-sm" style={{background: backgroundColors[index]}}/>
             <p className="text-[12px] w-14 my-1" style={{lineHeight: "12px"}}>
               {item.name}

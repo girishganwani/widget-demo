@@ -7,9 +7,24 @@ import FormFieldsConfig from './configs/amplify.form.config.json'
 import FullWidget from "./components/FullWidget"
 import Context from "./context";
 import useArticles from './hooks/useArticles';
+import useIcon from './hooks/useIcon';
 
 const App = () => {
-  const { currentArticle, saveUrlLoading, handleDelete, isArticleDeleted, updateArticle, setCurrentArticle, authToken } = useArticles();
+
+  useIcon();
+
+  const {
+    currentArticle,
+    saveUrlLoading,
+    handleDelete,
+    isArticleDeleted,
+    updateArticle,
+    setCurrentArticle,
+    authToken,
+    updateShelveArticle,
+    fetchBookShelvesAxiosRequest,
+    allBookShelves,
+  } = useArticles();
 
   return (
     <Authenticator formFields={FormFieldsConfig} >
@@ -22,6 +37,9 @@ const App = () => {
           updateArticle,
           setCurrentArticle,
           authToken,
+          updateShelveArticle,
+          fetchBookShelvesAxiosRequest,
+          allBookShelves
         }}>
           <div className="font-Raleway">
             <FullWidget />

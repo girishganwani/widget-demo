@@ -41,12 +41,15 @@ export interface IContext {
   updateArticle: (articleId: string, body: Partial<IArticle>) => void;
   setCurrentArticle: React.Dispatch<React.SetStateAction<IArticle | null>>;
   authToken: string | undefined;
+  updateShelveArticle: (articleURL: string | undefined, shelveName: string | undefined, noOfArticles: number | undefined) => void;
+  fetchBookShelvesAxiosRequest: (dynamicConfig?: Partial<useCacheQueryProps<IBookShelves[]>>) => Promise<void>;
+  allBookShelves: IBookShelves[] | null;
 }
 export interface IRecommendedArticle {
   id?: string,
   title?: string,
   articleURL?: string,
-  websiteURL?: string
+  websiteBaseURL?: string
 }
 
 export interface IBookShelves {
