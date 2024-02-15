@@ -11,7 +11,7 @@ const FullWidget = () => {
   const [showPersonalLibModal, setShowPersonalLibModal] = useState<boolean>(false);
   const { saveUrlLoading: isLoading } = useContext(Context) as IContext;
   return (
-    <div className='w-[432px] bg-[#FBF9FC] px-3 py-3 flex flex-col gap-3 rounded-xl relative z-0'>
+    <div className={`w-[432px] ${showPersonalLibModal? 'bg-black opacity-30' : 'bg-[#FBF9FC]'} px-3 py-3 flex flex-col gap-3 rounded-xl relative z-0`}>
       <CurrentArticle />
       { !isLoading &&  (
         <>

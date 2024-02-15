@@ -21,8 +21,8 @@ const RecentShelves = ({ recentShelves }: RecentShelvesProps) => {
       <p className="text-[15px]">Recent</p>
       <div className="flex justify-between mr-3">
         {recentShelves.map((item, index) => (
-          <div className={`w-[66px] mr-3 cursor-pointer ${index === 0 ? 'shadow scale-110' : ''}`} key={item.name} onClick={() => updateShelveArticle(currentArticle?.articleURL, item.name, item.numberOfArticles)}>
-          <div className="h-16 w-16 rounded-sm" style={{background: backgroundColors[index]}}/>
+          <div className={`w-[66px] mr-3 cursor-pointer ${index === 0 ? 'shadow bg-[#DFE3EE] p-2 rounded-lg' : ''}`} key={item.name} onClick={() => updateShelveArticle(currentArticle?.articleURL, item.name, item.numberOfArticles)}>
+          <div className={`rounded-sm ${index ===0 ? 'w-12 h-12' : 'w-16 h-16'}`} style={{background: backgroundColors[index]}}/>
             <p className="text-[12px] w-16 my-1" style={{lineHeight: "12px"}}>
               {item.name}
             </p>
